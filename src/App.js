@@ -1,5 +1,5 @@
 import './App.css';
-import ServicesContainer from './components/ServicesContainer';
+import ServicesPage from './components/ServicesPage';
 import ClientsContainer from './components/ClientsContainer';
 import ReservationsContainer from './components/ReservationsContainer';
 
@@ -8,6 +8,7 @@ function App() {
     <div className="App">
       {/* <ServicesContainer /> */}
       {/* <ClientsContainer /> */}
+      <ServicesPage />
       <ReservationsContainer />
     </div>
   );
