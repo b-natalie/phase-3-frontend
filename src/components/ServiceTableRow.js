@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Moment from 'react-moment';
 import { Link } from "react-router-dom";
 
 function ServiceTableRow({ service, performDelete, performEdit }) {
@@ -42,7 +43,6 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
     }
 
     function handleCancel() {
-        // console.log(service.id)
         performDelete(service.id)
     }
 
@@ -50,8 +50,8 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
         if (!editMode) {
             return (
                 <tr>
-                    <td>{service.time}</td>
-                    <td>{service.time}</td>
+                    <td><Moment format="YYYY/MM/DD">{service.time}</Moment></td>
+                    <td><Moment format="hh:mm:ss">{service.time}</Moment></td>
                     <td><Link to={`services/${service.id}`}>{service.name}</Link></td>
                     <td>{service.instructor}</td>
                     <td>{service.client_count}</td>
@@ -75,15 +75,6 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
     }
 
     return (
-        // <tr>
-        //     <td>{service.time}</td>
-        //     <td>{service.time}</td>
-        //     <td>{service.name}</td>
-        //     <td>{service.instructor}</td>
-        //     <td>{service.client_count}</td>
-        //     <td><button onClick={handleEditMode} type="button" className="btn btn-secondary">Edit</button></td>
-        //     <td><button onClick={handleCancel} type="button" className="btn btn-danger">Cancel</button></td>
-        // </tr>
         <>
             {displayRow()}
         </>

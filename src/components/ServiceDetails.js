@@ -8,6 +8,7 @@ function ServiceDetails() {
 
     const [ isLoaded, setIsLoaded ] = useState(false)
     const [ isDeleted, setIsDeleted ] = useState(false)
+    const [ isAdded, setIsAdded ] = useState(false)
     const [ serviceDetailsObj, setServiceDetailsObj ] = useState({
         name: "",
         description: "",
@@ -27,7 +28,7 @@ function ServiceDetails() {
             setServiceDetailsObj(service)
             setIsLoaded(!isLoaded)
         })
-    }, [isDeleted])
+    }, [isDeleted, isAdded])
 
     function deleteReservation(resId) {
         fetch(`http://localhost:9292/reservations/${resId}`, {
@@ -36,9 +37,35 @@ function ServiceDetails() {
         .then(data => setIsDeleted(!isDeleted))
     }
 
+    function addClientToService(newClient) {
+        fetch("http://localhost:9292/clients", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(newClient)
+        })
+        .then(resp => resp.json())
+        .then(client => {
+            fetch("http://localhost:9292/reservations", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    clientId: client.id,
+                    serviceId: id
+                })
+            })
+            setIsAdded(!isAdded)
+        })
+    }
+
     return (
         <div>
-            <ServiceAddClient />
+            <ServiceAddClient addClientToService={addClientToService}/>
             <table className="table">
                 <thead>
                     <tr>
