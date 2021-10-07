@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ServiceAddClassForm from "./ServiceAddClassForm";
 import ServicesContainer from "./ServicesContainer";
 
 function ServicesPage() {
@@ -6,6 +7,7 @@ function ServicesPage() {
     const [ servicesArray, setServicesArray ] = useState([]);
     const [ isDeletedService, setIsDeletedService ] = useState(false);
     const [ isUpdatedService, setIsUpdatedService ] = useState(false);
+    const [ isAddedService, setIsAddedService ] = useState(false);
 
     useEffect(() => {
         fetch("http://localhost:9292/services")
@@ -17,10 +19,6 @@ function ServicesPage() {
         fetch(`http://localhost:9292/services/${deleteServiceId}`, {
             method: "DELETE"
         })
-        // .then(resp => {
-        //     // debugger
-        //     resp.json()
-        // })
         .then(data => setIsDeletedService(!isDeletedService))
     }
 
@@ -33,12 +31,24 @@ function ServicesPage() {
             },
             body: JSON.stringify(updatedServiceObj)
         })
-        // .then(resp => resp.json())
         .then(data => setIsUpdatedService(!isUpdatedService))
+    }
+
+    function performAddService(newService) {
+        fetch("http://localhost:9292/services", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(newService)
+        })
+        .then(data => setIsAddedService(!isAddedService))
     }
 
     return (
         <div>
+            <ServiceAddClassForm performAddService={performAddService}/>
             <ServicesContainer 
                 servicesArray={servicesArray} 
                 performDelete={performDelete}
