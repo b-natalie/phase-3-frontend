@@ -5,6 +5,7 @@ import ReservationsContainer from './components/ReservationsContainer';
 import Header from './components/Header';
 import { Route, Switch } from 'react-router';
 import ServiceDetails from './components/ServiceDetails';
+import ClientsPage from './components/ClientsPage';
 
 function App() {
 
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route path="/services">
           <ServicesPage />
+        </Route>
+        <Route path="/clients">
+          <ClientsPage />
         </Route>
       </Switch>
     </div>

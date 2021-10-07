@@ -6,7 +6,7 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
 
     const { name, description, duration, time, instructor, price } = service
 
-    const [ editMode, setEditMode ] = useState(false);
+    const [ isEditMode, setIsEditMode ] = useState(false);
     const [ updatedInput, setUpdatedInput ] = useState({
         name,
         description, 
@@ -35,11 +35,11 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
         }
 
         performEdit(updatedObj, service.id)
-        handleEditMode();
+        handleIsEditMode();
     }
 
-    function handleEditMode() {
-        setEditMode(!editMode)
+    function handleIsEditMode() {
+        setIsEditMode(!isEditMode)
     }
 
     function handleCancel() {
@@ -47,7 +47,7 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
     }
 
     function displayRow() {
-        if (!editMode) {
+        if (!isEditMode) {
             return (
                 <tr>
                     <td><Moment format="YYYY/MM/DD">{service.time}</Moment></td>
@@ -55,7 +55,7 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
                     <td><Link to={`services/${service.id}`}>{service.name}</Link></td>
                     <td>{service.instructor}</td>
                     <td>{service.client_count}</td>
-                    <td><button onClick={handleEditMode} type="button" className="btn btn-secondary">Edit</button></td>
+                    <td><button onClick={handleIsEditMode} type="button" className="btn btn-secondary">Edit</button></td>
                     <td><button onClick={handleCancel} type="button" className="btn btn-danger">Cancel</button></td>
                 </tr>
             )
