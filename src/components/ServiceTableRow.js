@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function ServiceTableRow({ service, performDelete, performEdit }) {
 
@@ -51,7 +52,7 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
                 <tr>
                     <td>{service.time}</td>
                     <td>{service.time}</td>
-                    <td>{service.name}</td>
+                    <td><Link to={`services/${service.id}`}>{service.name}</Link></td>
                     <td>{service.instructor}</td>
                     <td>{service.client_count}</td>
                     <td><button onClick={handleEditMode} type="button" className="btn btn-secondary">Edit</button></td>
