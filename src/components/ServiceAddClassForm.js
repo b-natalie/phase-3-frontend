@@ -1,6 +1,4 @@
-import moment from "moment";
 import React, { useState } from "react";
-import Datetime from 'react-datetime';
 
 function ServiceAddClassForm({ performAddService }) {
 
@@ -46,9 +44,10 @@ function ServiceAddClassForm({ performAddService }) {
     }
 
     return (
-        <div className="row g-3 align-items-center">
+        <div className="row g-3 align-items-center" style={{"width" : "75%", "margin": "auto"}}>
+            <h5 className="card-title">Add New Class</h5>
             <div className="col-auto">
-                <input type="text" name="date" placeholder="MM/DD/YYY" className="form-control" value={newServiceInput.date} onChange={handleInput}/>
+                <input type="text" name="date" placeholder="MM/DD/YYYY" className="form-control" value={newServiceInput.date} onChange={handleInput}/>
             </div>
             <div className="col-auto">
                 <input type="text" name="time" placeholder="HH:MM AM/PM" className="form-control" value={newServiceInput.time} onChange={handleInput}/>
@@ -71,6 +70,7 @@ function ServiceAddClassForm({ performAddService }) {
             <div className="col-auto">
                 <button type="button" className="btn btn-secondary" onClick={handleAdd}>Add</button>
             </div>
+            <p></p>
         </div>
     )
 }

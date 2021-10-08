@@ -1,11 +1,10 @@
 import './App.css';
 import ServicesPage from './components/ServicesPage';
-import ClientsContainer from './components/ClientsContainer';
-import ReservationsContainer from './components/ReservationsContainer';
 import Header from './components/Header';
 import { Route, Switch } from 'react-router';
-import ServiceDetails from './components/ServiceDetails';
+import ServiceDetails from './components/ServiceDetailsPage';
 import ClientsPage from './components/ClientsPage';
+import ClientDetailsPage from './components/ClientDetailsPage';
 
 function App() {
 
@@ -18,6 +17,9 @@ function App() {
         </Route>
         <Route path="/services">
           <ServicesPage />
+        </Route>
+        <Route path="/clients/:id">
+          <ClientDetailsPage />
         </Route>
         <Route path="/clients">
           <ClientsPage />

@@ -32,7 +32,7 @@ function ClientAddForm({ performAddClient }) {
     }
 
     return (
-        <div className="row g-3 align-items-center">
+        <div className="row g-3 align-items-center" style={{"width" : "75%", "margin": "auto"}}>
             <div className="col-auto">
                 <input type="text" name="firstName" placeholder="First name" className="form-control" value={newClientInput.firstName} onChange={handleInput} />
             </div>

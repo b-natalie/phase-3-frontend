@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function ClientPageRow({ client, performDelete, performEdit }) {
 
@@ -43,7 +44,7 @@ function ClientPageRow({ client, performDelete, performEdit }) {
                     <td>{client.first_name}</td>
                     <td>{client.last_name}</td>
                     <td>{client.email}</td>
-                    <td>{client.service_count}</td>
+                    <td><Link to={`clients/${client.id}`}>{client.service_count}</Link></td>
                     <td><button type="button" className="btn btn-secondary" onClick={handleIsEditMode}>Edit</button></td>
                     <td><button type="button" className="btn btn-danger" onClick={handleDelete} >Delete</button></td>
                 </tr>

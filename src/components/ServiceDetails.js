@@ -1,90 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
-import ClientRow from "./ClientRow";
-import ServiceAddClient from "./ServiceAddClientForm";
+import React from "react";
 
-function ServiceDetails() {
-
-    const [ isLoaded, setIsLoaded ] = useState(false)
-    const [ isDeleted, setIsDeleted ] = useState(false)
-    const [ isAdded, setIsAdded ] = useState(false)
-    const [ serviceDetailsObj, setServiceDetailsObj ] = useState({
-        name: "",
-        description: "",
-        time: "",
-        duration: 60,
-        price: 10,
-        instructor: "",
-        clients: []
-    });
-
-    const id = useParams().id;
-
-    useEffect(() => {
-        fetch(`http://localhost:9292/services/${id}`)
-        .then(resp => resp.json())
-        .then(service => {
-            setServiceDetailsObj(service)
-            setIsLoaded(!isLoaded)
-        })
-    }, [isDeleted, isAdded])
-
-    function deleteReservation(resId) {
-        fetch(`http://localhost:9292/reservations/${resId}`, {
-            method: "DELETE"
-        })
-        .then(data => setIsDeleted(!isDeleted))
-    }
-
-    function addClientToService(newClient) {
-        fetch("http://localhost:9292/clients", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(newClient)
-        })
-        .then(resp => resp.json())
-        .then(client => {
-            fetch("http://localhost:9292/reservations", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                    clientId: client.id,
-                    serviceId: id
-                })
-            })
-            setIsAdded(!isAdded)
-        })
-    }
-
+function ServiceDetails({ serviceDetailsObj }) {
     return (
-        <div>
-            <ServiceAddClient addClientToService={addClientToService}/>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Cancel Class</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {serviceDetailsObj.clients.map((client, index) => {
-                        return (
-                            <ClientRow key={client.id} client={client} index={index} deleteReservation={deleteReservation}/>
-                        )
-                    })}
-                </tbody>
-            </table>
-            <Link to="/services"><button type="button" className="btn btn-secondary">Go Back</button></Link>
+        <div className="card text-center" style={{"width" : "75%", "margin": "auto"}}>
+            {/* <div className="card-header">
+                {serviceDetailsObj.name}
+            </div> */}
+            <div className="card-body">
+                <h4 className="card-title">{serviceDetailsObj.name} with {serviceDetailsObj.instructor}</h4>
+                <p className="card-text">{serviceDetailsObj.description}</p>
+                <p className="card-text">{serviceDetailsObj.duration} minutes</p>
+            </div>
+            {/* <div class="card-footer text-muted">
+                2 days ago
+            </div> */}
         </div>
     )
 }

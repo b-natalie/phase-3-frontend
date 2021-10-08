@@ -30,7 +30,7 @@ function ServiceAddClientForm({ addClientToService }) {
     }
 
     return (
-        <div className="row g-3 align-items-center">
+        <div className="row g-3 align-items-center" style={{"width" : "75%", "margin": "auto"}} >
             <div className="col-auto">
                 <input type="text" name="firstName" placeholder="First name" className="form-control" onChange={handleClientInput} value={clientInput.firstName}/>
             </div>
@@ -43,6 +43,7 @@ function ServiceAddClientForm({ addClientToService }) {
             <div className="col-auto">
                 <button type="button" className="btn btn-secondary" onClick={handleAddClient}>Add</button>
             </div>
+            <p></p>
         </div>
     )
 }

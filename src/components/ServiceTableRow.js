@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Moment from 'react-moment';
 import { Link } from "react-router-dom";
 
 function ServiceTableRow({ service, performDelete, performEdit }) {
