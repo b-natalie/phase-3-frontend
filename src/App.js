@@ -24,6 +24,9 @@ function App() {
         <Route path="/clients">
           <ClientsPage />
         </Route>
+        <Route exact path="/">
+          <ServicesPage />
+        </Route>
       </Switch>
     </div>
   );

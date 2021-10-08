@@ -33,6 +33,7 @@ function ClientAddForm({ performAddClient }) {
 
     return (
         <div className="row g-3 align-items-center" style={{"width" : "75%", "margin": "auto"}}>
+            <h5 className="card-title">Add New Client</h5>
             <div className="col-auto">
                 <input type="text" name="firstName" placeholder="First name" className="form-control" value={newClientInput.firstName} onChange={handleInput} />
             </div>
@@ -45,6 +46,7 @@ function ClientAddForm({ performAddClient }) {
             <div className="col-auto">
                 <button type="button" className="btn btn-secondary" onClick={handleAddClient}>Add</button>
             </div>
+            <p></p>
         </div>
     )
 }
