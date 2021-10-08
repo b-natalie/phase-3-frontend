@@ -43,6 +43,7 @@ function ClientPageRow({ client, performDelete, performEdit }) {
                     <td>{client.first_name}</td>
                     <td>{client.last_name}</td>
                     <td>{client.email}</td>
+                    <td>{client.service_count}</td>
                     <td><button type="button" className="btn btn-secondary" onClick={handleIsEditMode}>Edit</button></td>
                     <td><button type="button" className="btn btn-danger" onClick={handleDelete} >Delete</button></td>
                 </tr>
@@ -53,6 +54,7 @@ function ClientPageRow({ client, performDelete, performEdit }) {
                     <td><input type="text" name="first" className="form-control" value={clientInfo.first} onChange={handleInput}/></td>
                     <td><input type="text" name="last" className="form-control" value={clientInfo.last} onChange={handleInput}/></td>
                     <td><input type="text" name="email" className="form-control" value={clientInfo.email} onChange={handleInput}/></td>
+                    <td>{client.service_count}</td>
                     <td><button type="button" className="btn btn-secondary" onClick={handleSave}>Save</button></td>
                     <td><button type="button" className="btn btn-danger">Cancel</button></td>
                 </tr>
