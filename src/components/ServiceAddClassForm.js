@@ -10,8 +10,8 @@ function ServiceAddClassForm({ performAddService }) {
         name: "",
         instructor: "",
         description: "",
-        duration: 0,
-        price: 0
+        duration: "",
+        price: ""
     })
 
     function handleInput(event) {
@@ -23,7 +23,8 @@ function ServiceAddClassForm({ performAddService }) {
 
     function handleAdd() {
         const newServiceObj = {
-            time: moment(newServiceInput.date + "T" + newServiceInput.time + ":00").format("YYYY-MM-DDTHH:mm:ss.SSS"),
+            date: newServiceInput.date,
+            time: newServiceInput.time,
             name: newServiceInput.name,
             instructor: newServiceInput.instructor,
             description: newServiceInput.description,
@@ -31,34 +32,41 @@ function ServiceAddClassForm({ performAddService }) {
             price: newServiceInput.price
         }
 
-        debugger
-
-        // console.log(newServiceObj)
         performAddService(newServiceObj);
+
+        setNewServiceInput({
+            date: "",
+            time: "",
+            name: "",
+            instructor: "",
+            description: "",
+            duration: "",
+            price: ""
+        })
     }
 
     return (
         <div className="row g-3 align-items-center">
             <div className="col-auto">
-                <input type="date" name="date" placeholder="Date" className="form-control" onChange={handleInput}/>
+                <input type="text" name="date" placeholder="MM/DD/YYY" className="form-control" value={newServiceInput.date} onChange={handleInput}/>
             </div>
             <div className="col-auto">
-                <input type="time" name="time" placeholder="Time" className="form-control" onChange={handleInput}/>
+                <input type="text" name="time" placeholder="HH:MM AM/PM" className="form-control" value={newServiceInput.time} onChange={handleInput}/>
             </div>
             <div className="col-auto">
-                <input type="text" name="name" placeholder="Class Name" className="form-control" onChange={handleInput}/>
+                <input type="text" name="name" placeholder="Class Name" className="form-control" value={newServiceInput.name} onChange={handleInput}/>
             </div>
             <div className="col-auto">
-                <input type="text" name="instructor" placeholder="Instructor" className="form-control" onChange={handleInput}/>
+                <input type="text" name="instructor" placeholder="Instructor" className="form-control" value={newServiceInput.instructor} onChange={handleInput}/>
             </div>
             <div className="col-auto">
-                <input type="text" name="description" placeholder="Description" className="form-control" onChange={handleInput}/>
+                <input type="text" name="description" placeholder="Description" className="form-control" value={newServiceInput.description} onChange={handleInput}/>
             </div>
             <div className="col-auto">
-                <input type="text" name="duration" placeholder="Duration" className="form-control" onChange={handleInput}/>
+                <input type="text" name="duration" placeholder="Duration" className="form-control" value={newServiceInput.duration} onChange={handleInput}/>
             </div>
             <div className="col-auto">
-                <input type="text" name="price" placeholder="Price" className="form-control" onChange={handleInput}/>
+                <input type="text" name="price" placeholder="Price" className="form-control" value={newServiceInput.price} onChange={handleInput}/>
             </div>
             <div className="col-auto">
                 <button type="button" className="btn btn-secondary" onClick={handleAdd}>Add</button>

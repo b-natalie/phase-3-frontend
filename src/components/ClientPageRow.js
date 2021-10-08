@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ClientPageRow({ client }) {
+function ClientPageRow({ client, performDelete, performEdit }) {
 
     const [ isEditMode, setIsEditMode ] = useState(false)
     const [ clientInfo, setClientInfo ] = useState({
@@ -16,8 +16,24 @@ function ClientPageRow({ client }) {
         })
     }
 
+    function handleSave() {
+        
+        const updatedObj = {
+            firstName: clientInfo.first,
+            lastName: clientInfo.last,
+            email: clientInfo.email
+        }
+
+        performEdit(updatedObj, client.id);
+        handleIsEditMode();
+    }
+
     function handleIsEditMode() {
         setIsEditMode(!isEditMode)
+    }
+
+    function handleDelete() {
+        performDelete(client.id)
     }
 
     function displayRow() {
@@ -28,7 +44,7 @@ function ClientPageRow({ client }) {
                     <td>{client.last_name}</td>
                     <td>{client.email}</td>
                     <td><button type="button" className="btn btn-secondary" onClick={handleIsEditMode}>Edit</button></td>
-                    <td><button type="button" className="btn btn-danger">Delete</button></td>
+                    <td><button type="button" className="btn btn-danger" onClick={handleDelete} >Delete</button></td>
                 </tr>
             )
         } else {
@@ -37,7 +53,7 @@ function ClientPageRow({ client }) {
                     <td><input type="text" name="first" className="form-control" value={clientInfo.first} onChange={handleInput}/></td>
                     <td><input type="text" name="last" className="form-control" value={clientInfo.last} onChange={handleInput}/></td>
                     <td><input type="text" name="email" className="form-control" value={clientInfo.email} onChange={handleInput}/></td>
-                    <td><button type="button" className="btn btn-secondary">Save</button></td>
+                    <td><button type="button" className="btn btn-secondary" onClick={handleSave}>Save</button></td>
                     <td><button type="button" className="btn btn-danger">Cancel</button></td>
                 </tr>
             )

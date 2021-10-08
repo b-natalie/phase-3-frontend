@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 
 function ServiceTableRow({ service, performDelete, performEdit }) {
 
-    const { name, description, duration, time, instructor, price } = service
+    const { name, description, duration, date, time, instructor, price } = service
 
     const [ isEditMode, setIsEditMode ] = useState(false);
     const [ updatedInput, setUpdatedInput ] = useState({
         name,
-        description, 
+        description,
+        date, 
         time,
         duration,
         price, 
@@ -23,18 +24,19 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
         })
     }
 
-    function handleSave(event) {
+    function handleSave() {
 
         const updatedObj = {
             name: updatedInput.name,
             description: updatedInput.description,
+            date: updatedInput.date,
             time: updatedInput.time,
             duration: updatedInput.duration,
             price: updatedInput.price,
             instructor: updatedInput.instructor
         }
 
-        performEdit(updatedObj, service.id)
+        performEdit(updatedObj, service.id);
         handleIsEditMode();
     }
 
@@ -50,8 +52,8 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
         if (!isEditMode) {
             return (
                 <tr>
-                    <td><Moment format="YYYY/MM/DD">{service.time}</Moment></td>
-                    <td><Moment format="hh:mm:ss">{service.time}</Moment></td>
+                    <td>{service.date}</td>
+                    <td>{service.time}</td>
                     <td><Link to={`services/${service.id}`}>{service.name}</Link></td>
                     <td>{service.instructor}</td>
                     <td>{service.client_count}</td>
@@ -62,7 +64,7 @@ function ServiceTableRow({ service, performDelete, performEdit }) {
         } else {
             return (
                 <tr>
-                    <td><input type="text" name="date" className="form-control" value={updatedInput.time} onChange={handleInput}/></td>
+                    <td><input type="text" name="date" className="form-control" value={updatedInput.date} onChange={handleInput}/></td>
                     <td><input type="text" name="time" className="form-control" value={updatedInput.time} onChange={handleInput}/></td>
                     <td><input type="text" name="name" className="form-control" value={updatedInput.name} onChange={handleInput}/></td>
                     <td><input type="text" name="instructor" className="form-control" value={updatedInput.instructor} onChange={handleInput}/></td>

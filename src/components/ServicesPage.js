@@ -13,7 +13,7 @@ function ServicesPage() {
         fetch("http://localhost:9292/services")
         .then(resp => resp.json())
         .then(data => setServicesArray(data))
-    }, [isDeletedService, isUpdatedService])
+    }, [isDeletedService, isUpdatedService, isAddedService])
 
     function performDelete(deleteServiceId) {
         fetch(`http://localhost:9292/services/${deleteServiceId}`, {

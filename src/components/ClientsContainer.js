@@ -1,7 +1,7 @@
 import React from "react";
 import ClientPageRow from "./ClientPageRow";
 
-function ClientsContainer({ clientsArray }) {
+function ClientsContainer({ clientsArray, performDelete, performEdit }) {
     return (
         <div>
             {console.log(clientsArray)}
@@ -18,7 +18,7 @@ function ClientsContainer({ clientsArray }) {
                 <tbody>
                     {clientsArray.map(client => {
                         return (
-                            <ClientPageRow key={client.id} client={client} />
+                            <ClientPageRow key={client.id} client={client} performDelete={performDelete} performEdit={performEdit} />
                         )
                     })}
                 </tbody>
